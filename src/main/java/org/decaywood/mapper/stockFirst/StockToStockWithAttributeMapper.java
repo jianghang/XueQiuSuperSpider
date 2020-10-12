@@ -1,6 +1,7 @@
 package org.decaywood.mapper.stockFirst;
 
 import com.fasterxml.jackson.databind.JsonNode;
+
 import org.decaywood.entity.Stock;
 import org.decaywood.mapper.AbstractMapper;
 import org.decaywood.timeWaitingStrategy.TimeWaitingStrategy;
@@ -37,49 +38,50 @@ public class StockToStockWithAttributeMapper extends AbstractMapper<Stock, Stock
     @Override
     public Stock mapLogic(Stock stock) throws Exception {
 
-        if(stock == null || stock == EmptyObject.emptyStock) return EmptyObject.emptyStock;
+        if (stock == null || stock == EmptyObject.emptyStock) return EmptyObject.emptyStock;
 
         String target = URLMapper.STOCK_JSON.toString();
         RequestParaBuilder builder = new RequestParaBuilder(target)
-                .addParameter("code", stock.getStockNo());
+            .addParameter("symbol", stock.getStockNo())
+            .addParameter("extend", "detail");
         URL url = new URL(builder.build());
         String json = request(url);
         JsonNode node = mapper.readTree(json);
-        node = node.get(stock.getStockNo());
+        node = node.get("data");
+        node = node.get("quote");
+        // node = node.get(stock.getStockNo());
 
         stock.setTime(node.get("time").asText());
-        stock.setCurrency_unit(node.get("currency_unit").asText());
+        stock.setCurrency_unit(node.get("currency").asText());
         stock.setCurrent(node.get("current").asText());
         stock.setVolume(node.get("volume").asText());
-        stock.setPercentage(node.get("percentage").asText());
-        stock.setChange(node.get("change").asText());
+        stock.setPercentage(node.get("percent").asText());
+        stock.setChange(node.get("chg").asText());
         stock.setOpen(node.get("open").asText());
         stock.setHigh(node.get("high").asText());
         stock.setLow(node.get("low").asText());
         stock.setAmplitude(node.get("amplitude").asText());
-        stock.setFall_stop(node.get("fall_stop").asText());
-        stock.setRise_stop(node.get("rise_stop").asText());
-        stock.setClose(node.get("close").asText());
+        stock.setFall_stop(node.get("limit_down").asText());
+        stock.setRise_stop(node.get("limit_up").asText());
+        // stock.setClose(node.get("close").asText());
         stock.setLast_close(node.get("last_close").asText());
-        stock.setHigh52Week(node.get("high52week").asText());
-        stock.setLow52week(node.get("low52week").asText());
-        stock.setMarketCapital(node.get("marketCapital").asText());
+        stock.setHigh52Week(node.get("high52w").asText());
+        stock.setLow52week(node.get("low52w").asText());
+        stock.setMarketCapital(node.get("market_capital").asText());
         stock.setFloat_market_capital(node.get("float_market_capital").asText());
         stock.setFloat_shares(node.get("float_shares").asText());
-        stock.setTotalShares(node.get("totalShares").asText());
+        stock.setTotalShares(node.get("total_shares").asText());
         stock.setEps(node.get("eps").asText());
-        stock.setNet_assets(node.get("net_assets").asText());
+        stock.setNet_assets(node.get("navps").asText());
         stock.setPe_ttm(node.get("pe_ttm").asText());
         stock.setPe_lyr(node.get("pe_lyr").asText());
         stock.setDividend(node.get("dividend").asText());
-        stock.setPsr(node.get("psr").asText());
+        // stock.setPsr(node.get("psr").asText());
         stock.setTurnover_rate(node.get("turnover_rate").asText());
         stock.setAmount(node.get("amount").asText());
         return stock;
 
     }
-
-
 
 
 }

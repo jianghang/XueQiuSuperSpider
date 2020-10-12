@@ -19,7 +19,6 @@ public abstract class DateParser {
     private static final Date quarter4;
 
 
-
     static {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -35,13 +34,17 @@ public abstract class DateParser {
 
     public static Date parseToDate(String time) {
         DateFormat dateFormat =
-                new SimpleDateFormat("EEE MMM dd hh:mm:ss zzz yyyy", Locale.ENGLISH);
+            new SimpleDateFormat("EEE MMM dd hh:mm:ss zzz yyyy", Locale.ENGLISH);
         try {
             return dateFormat.parse(time);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static Date parseTimestampToDate(String timestamp) {
+        return new Date(Long.parseLong(timestamp));
     }
 
     public static String getTimePrefix(boolean quarterScope) {
@@ -57,11 +60,11 @@ public abstract class DateParser {
         int month = calendar.get(Calendar.MONTH) + diff;
         int day = calendar.get(Calendar.DATE);
 
-        if(quarterScope) {
+        if (quarterScope) {
             year = calendar.get(Calendar.YEAR);
             if (date.after(quarter3)) calendar.setTime(quarter3);
-            else if(date.after(quarter2)) calendar.setTime(quarter2);
-            else if(date.after(quarter1)) calendar.setTime(quarter1);
+            else if (date.after(quarter2)) calendar.setTime(quarter2);
+            else if (date.after(quarter1)) calendar.setTime(quarter1);
             else {
                 year--;
                 calendar.setTime(quarter4);
@@ -78,7 +81,7 @@ public abstract class DateParser {
 
     public static Date parseDate(String yyyymmdd) {
 
-        if(yyyymmdd == null || yyyymmdd.length() != 8 || !isdigit(yyyymmdd))
+        if (yyyymmdd == null || yyyymmdd.length() != 8 || !isdigit(yyyymmdd))
             throw new IllegalArgumentException();
 
         Calendar calendar = Calendar.getInstance();
@@ -92,7 +95,7 @@ public abstract class DateParser {
     }
 
     private static boolean isdigit(String str) {
-        for (char c : str.toCharArray()) if(!Character.isDigit(c)) return false;
+        for (char c : str.toCharArray()) if (!Character.isDigit(c)) return false;
         return true;
     }
 

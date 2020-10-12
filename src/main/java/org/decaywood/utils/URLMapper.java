@@ -24,9 +24,10 @@ public enum URLMapper {
     MARKET_QUOTATIONS_RANK_JSON("https://xueqiu.com/stock/quote_order.json"),
     SCOPE_STOCK_RANK_JSON("https://xueqiu.com/stock/rank.json"),
     STOCK_TREND_JSON("https://xueqiu.com/stock/forchartk/stocklist.json"),
-    STOCK_JSON("https://xueqiu.com/v4/stock/quote.json"),
-    INDUSTRY_JSON("https://xueqiu.com/industry/quote_order.json"),
-
+    // STOCK_JSON("https://xueqiu.com/v4/stock/quote.json"),
+    STOCK_JSON("https://stock.xueqiu.com/v5/stock/quote.json"),
+    // INDUSTRY_JSON("https://xueqiu.com/industry/quote_order.json"),
+    INDUSTRY_JSON("https://xueqiu.com/service/v5/stock/screener/quote/list"),
     /*--------------------------------  NetEase     --------------------------------------*/
 
     NETEASE_MAIN_PAGE("https://quotes.money.163.com/stock"),

@@ -157,7 +157,7 @@ public class StreamTest {
         StockToStockWithStockTrendMapper mapper2 = new StockToStockWithStockTrendMapper();
         Map<Industry, List<Stock>> res = collector.get()
                 .parallelStream()
-                .filter(x -> x.getIndustryName().equals("畜牧业"))
+                .filter(x -> x.getIndustryName().equals("沪A涨幅"))
                 .map(mapper)
                 .flatMap(Collection::stream)
                 .map(mapper1.andThen(mapper2))

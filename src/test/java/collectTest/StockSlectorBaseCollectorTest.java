@@ -55,7 +55,7 @@ public class StockSlectorBaseCollectorTest {
         collector.addQuotaChainNode(quota);
         List<Stock> stocks = collector.get();
         for (Stock stock : stocks) {
-            System.out.println(stock.getStockName() + "  " + stock.getStockNo());
+            System.out.println(stock.getStockName() + "  " + stock.getStockNo() + " " + stock.getCurrent());
         }
     }
 

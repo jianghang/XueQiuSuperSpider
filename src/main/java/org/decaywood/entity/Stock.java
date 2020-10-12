@@ -66,7 +66,6 @@ public class Stock implements DeepCopy<Stock> {
     }
 
 
-
     //股票名称
     public String getStockName() {
         return stockName;
@@ -95,6 +94,7 @@ public class Stock implements DeepCopy<Stock> {
     public void setCurrent(String current) {
         this.current = current;
     }
+
     //成交量
     public String getVolume() {
         return volume;
@@ -295,6 +295,7 @@ public class Stock implements DeepCopy<Stock> {
         this.net_assets = net_assets;
 
     }
+
     //动态市盈率
     public String getPe_ttm() {
         return pe_ttm;
@@ -338,7 +339,7 @@ public class Stock implements DeepCopy<Stock> {
 
     //雪球系统时间
     public void setTime(String time) {
-        this.time = DateParser.parseToDate(time);
+        this.time = DateParser.parseTimestampToDate(time);
     }
 
 
